@@ -1188,7 +1188,50 @@ void test_emilylk() {
         t1.Clear();
         assert(t1.IsEmpty());
     }
-	
+
+void test_camdendb01() {
+  cout << "Starting test_camdendb01" << endl;
+  
+  BST<string> strings;
+  BST<int> ints;
+  strings.Add("c");
+  strings.Add("b");
+  strings.Add("d");
+  strings.Add("e");
+  strings.Add("a");
+  ints.Add(3);
+  ints.Add(2);
+  ints.Add(4);
+  ints.Add(5);
+  ints.Add(1);
+  
+  TreeVisitor::ResetSS();
+  strings.PreorderTraverse(TreeVisitor::visitor);
+  assert(TreeVisitor::GetSS() == "cbade");
+  
+  TreeVisitor::ResetSS();
+  strings.InorderTraverse(TreeVisitor::visitor);
+  assert(TreeVisitor::GetSS() == "abcde");
+  
+  TreeVisitor::ResetSS();
+  strings.PostorderTraverse(TreeVisitor::visitor);
+  assert(TreeVisitor::GetSS() == "abedc");
+  
+  TreeVisitor::ResetSS();
+  ints.PreorderTraverse(TreeVisitor::visitor);
+  assert(TreeVisitor::GetSS() == "32145");
+  
+  TreeVisitor::ResetSS();
+  ints.InorderTraverse(TreeVisitor::visitor);
+  assert(TreeVisitor::GetSS() == "12345");
+  
+  TreeVisitor::ResetSS();
+  ints.PostorderTraverse(TreeVisitor::visitor);
+  assert(TreeVisitor::GetSS() == "12543");
+  
+  cout << "Ending test_camdendb01" << endl;
+}
+
 // Calling all test functions
 void testBSTAll() {
   test_pisan01();
@@ -1225,6 +1268,7 @@ void testBSTAll() {
   test_manvir();
   test_emilylk();
   test_leeh54();
+  test_camdendb01();
 }
 
 TEST_CASE("BST Tests") {
